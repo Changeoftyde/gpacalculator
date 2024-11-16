@@ -11,7 +11,7 @@
 <label for="b1g1" class="gtelabel">Grade 1: </label>
 <input class="gteinput" type="number" id="b1g1">
 </div>
-<div class="space"></div>
+<div id="space" class="space"></div>
 </div>
 <style>
   .addgrade {
@@ -116,7 +116,7 @@
   a = 0;
   function addgroup() {
     nog += 1;
-    document.getElementsByClassName("space")[0].remove();
+    document.getElementById("space").remove();
     newDiv = document.createElement("div");
     newDiv.id = "b".concat(nog.toString());
     newDiv.classList.add("gteb");
@@ -147,6 +147,7 @@
     newDiv.appendChild(newButton);
     newerDiv = document.createElement("div");
     newerDiv.classList.add("space");
+    newerDiv.id = "space";
     newDiv.appendChild(newerDiv);
   }
   cg = document.getElementById("cg");
