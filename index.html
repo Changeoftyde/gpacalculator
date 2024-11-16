@@ -1,4 +1,5 @@
 <body>
+<h1 class="corner" style="font-size: 6vw">...</h1>
 <img id="header" src="IMG_8409.png">
 <h2><br><br><br><br></h2>
 <h1><span style="color: #437ecf">Semester/Quarter Calculator</span><br><span style="color: #000000; font-size: 2.5vw">(100 Point Scale)</span></h1>
@@ -49,6 +50,12 @@
     left: 0;
     position: fixed;
     z-index: 2000;
+  }
+  .corner {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    transform: translate(-100%, -100%);
   }
   h3 {
     font-family: bold;
@@ -203,6 +210,7 @@
     }
     t100 = Math.round(parseFloat(cg.innerHTML) * 100);
     cg.innerHTML = t100 / 100;
+    document.getElementById("cg2").innerHTML = cg.innerHTML;
     }, 100);
   })
 </script>
