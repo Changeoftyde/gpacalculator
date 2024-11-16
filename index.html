@@ -1,32 +1,148 @@
-<!DOCTYPE html>
-<html>
 <body>
-<h1>Semester/Quarter Calculator</h1>
-<div class="gte">
-<div id="b1" class="gteb">
-<input class="gteinput" id="b1g1">
-<label for="b1g1" class="gtelabel">Grade 1:</label><br>
+<h1><br><br></h1>
+<h1>Semester/Quarter Calculator (100 Point Scale)</h1>
+<h2>Current Grade:</h2>
+<h3 id="cg">Enter Grades Below!</h3>
+<div id="gte" class="gte">
+<button class="addgroup" onclick="addgroup()">Add Group</button>
+<div id="b1" class="gteb"><br><span contenteditable="true">GROUP 1</span>-<span contenteditable="true">100</span>%<br><button onclick="addgrade()" id="bu1">Add Grade</button>
+<br>
+<label for="b1g1" class="gtelabel">Grade 1: </label>
+<input class="gteinput" type="number" id="b1g1">
 </div>
 </div>
 <style>
+  h3 {
+    font-size: 6vw;
+    margin-top: -5vw;
+  }
+  h2 {
+    font-size: 6vw;
+    margin-top: -5vw;
+  }
+  h1 {
+    font-size: 7.5vw;
+  }
+  .addgroup {
+    left: 30%;
+    top: 0%;
+    width: 40vw;
+    height: 7.5vw;
+    font-size: 5vw;
+  }
   .gteb {
-    width: 50%;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
     height: auto;
+    font-size: 5vw;
   }
   .gte {
-    width: 80%;
+    margin-top: -5vw;
+    position: absolute;
+    left: 10%;
+    width: 80.05%;
     height: auto;
   }
   .gtelabel {
-    font-size: 5vw;
+    font-size: 3vw;
   }
   .gteinput {
-    width: 5vw;
-    height: 3vw;
+    font-size: 3vw;
+    width: 10vw;
+    height: 4vw
   }
   body {
     text-align: center;
   }
 </style>
+<script>
+  nog1 = 1;
+  nog = 1;
+  function addgrade() {
+    newBr = document.createElement("br");
+    document.getElementById("b".concat(event.target.id.substring(2).toString())).appendChild(newBr);
+    if (window["nog".concat(event.target.id.substring(2).toString())] > 0) {
+    window["nog".concat(event.target.id.substring(2).toString())] += 1;
+    } else {
+    window["nog".concat(event.target.id.substring(2).toString())] = 1;
+    }
+    newGrade = document.createElement("label"); 
+    newGrade.classList.add("gtelabel");
+    newGrade.for = "b".concat(event.target.id.substring(2).toString(), "g", window["nog".concat(event.target.id.substring(2).toString())].toString());
+    newGrade.innerHTML = "Grade ".concat(window["nog".concat(event.target.id.substring(2).toString())], ": ");
+    document.getElementById("b".concat(event.target.id.substring(2).toString())).appendChild(newGrade);
+    newIn = document.createElement("input");
+    newIn.classList.add("gteinput");
+    newIn.id = "b".concat(event.target.id.substring(2).toString(), "g", window["nog".concat(event.target.id.substring(2).toString())])
+    document.getElementById("b".concat(event.target.id.substring(2).toString())).appendChild(newIn);
+  }
+  a = 0;
+  function addgroup() {
+    nog += 1;
+    newDiv = document.createElement("div");
+    newDiv.id = "b".concat(nog.toString());
+    newDiv.classList.add("gteb");
+    document.getElementById("gte").appendChild(newDiv);
+    newBR = document.createElement("br");
+    newDiv.appendChild(newBR);
+    newGN = document.createElement("span");
+    newGN.innerHTML = "GROUP ".concat(nog.toString());
+    newGN.contentEditable = true;
+    newDiv.appendChild(newGN);
+    newSP = document.createElement("span");
+    newSP.innerHTML = "-";
+    newDiv.appendChild(newSP);
+    newSP2 = document.createElement("span");
+    newSP2.contentEditable = true;
+    newSP2.innerHTML = "0";
+    newDiv.appendChild(newSP2);
+    newSP3 = document.createElement("span");
+    newSP3.innerHTML = "%";
+    newDiv.appendChild(newSP3);
+    newBR = document.createElement("br");
+    newDiv.appendChild(newBR);
+    newButton = document.createElement("button");
+    newButton.id = "bu".concat(nog.toString()); 
+    newButton.innerHTML = "Add Grade";
+    newButton.setAttribute("onclick", "addgrade()");
+    newDiv.appendChild(newButton);
+  }
+  cg = document.getElementById("cg");
+  window.addEventListener("keydown", function() {
+    setTimeout(function() {
+    cg.textContent = "0";
+    total = 0;
+    for (i = 0; i < nog; i++) {
+      if (i == 0) {
+        total += parseFloat(document.getElementById("b".concat((i + 1).toString())).children[2].innerHTML);
+      } else {
+        total += parseFloat(document.getElementById("b".concat((i + 1).toString())).children[3].innerHTML);
+      }
+    }
+    for (i = 0; i < nog; i++) {
+      if (i == 0) {
+        pc = parseFloat(document.getElementById("b".concat((i + 1).toString())).children[2].innerHTML) / total;
+      } else {
+        pc = parseFloat(document.getElementById("b".concat((i + 1).toString())).children[3].innerHTML) / total;
+      }
+      num = window["nog".concat((i + 1).toString())];
+      ttdb = 0;
+      for (a = 0; a < window["nog".concat((i + 1).toString())]; a++) {
+        iM = document.getElementById("b".concat((i + 1).toString(), "g", (a + 1).toString())).value;
+        if (iM == "") {
+          num -= 1;
+          continue;
+        }
+        ttdb += parseInt(iM);
+      }
+      Pct = (ttdb / num) * pc;
+      cg.innerHTML = parseFloat(cg.innerHTML) + Pct;
+    }
+    t100 = Math.round(parseFloat(cg.innerHTML) * 100);
+    cg.innerHTML = t100 / 100;
+    }, 100);
+  })
+</script>
 </body>
 </html>
