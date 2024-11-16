@@ -11,13 +11,12 @@
 <label for="b1g1" class="gtelabel">Grade 1: </label>
 <input class="gteinput" type="number" id="b1g1">
 </div>
-</div>
 <div class="space"></div>
+</div>
 <style>
   .space {
     width: 100%;
-    height: 25vw;
-    background-color: blue;
+    height: 20vw;
     position: relative;
   }
   #header {
@@ -96,6 +95,7 @@
   a = 0;
   function addgroup() {
     nog += 1;
+    document.getElementsByClassName("space")[0].remove();
     newDiv = document.createElement("div");
     newDiv.id = "b".concat(nog.toString());
     newDiv.classList.add("gteb");
@@ -123,6 +123,9 @@
     newButton.innerHTML = "Add Grade";
     newButton.setAttribute("onclick", "addgrade()");
     newDiv.appendChild(newButton);
+    newerDiv = document.createElement("div");
+    newerDiv.classList.add("space");
+    newDiv.appendChild(newerDiv);
   }
   cg = document.getElementById("cg");
   window.addEventListener("keydown", function() {
