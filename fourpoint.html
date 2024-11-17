@@ -71,6 +71,7 @@
   c = document.getElementById("courses");
   function addcourse() {
     noc += 1;
+    document.getElementById("space").remove();
     newDiv = document.createElement("div");
     newDiv.id = "c".concat(noc.toString());
     c.appendChild(newDiv);
@@ -91,6 +92,10 @@
     nSpan.innerHTML = " | Grade";
     nSpan.style.fontFamily = "bold";
     newDiv.appendChild(nSpan);
+    newerDiv = document.createElement("div");
+    newerDiv.classList.add("space");
+    newerDiv.id = "space";
+    c.appendChild(newerDiv);
   }
   window.addEventListener("keydown", function() {
     setTimeout(function() {
