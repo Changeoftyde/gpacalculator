@@ -1,4 +1,4 @@
-<body>
+<body onload="onload()">
 <h1 id="cg2" class="corner" style="color: #437ecf; font-size: 6vw">...</h1>
 <div id="header">
 <img class="link" src="Add a heading - 5.png">
@@ -20,20 +20,33 @@
 </div>
 <style>
   .link {
+    transition: 1.5s;
     z-index: 2001;
     height: 10vw;
     width: auto;
-    top: 5vw;
+    top: -15vw;
     position: fixed;
     left: 32.5vw;
   }
   .link2 {
+    transition: 1.5s;
     z-index: 2001;
     height: 10vw;
     width: auto;
-    top: 5vw;
+    top: -15vw;
     position: fixed;
     left: 56vw;
+  }
+  #header {
+    transition: 1.5s;
+    width: 100vw;
+    height: 23.22vw;
+    background-image: url("IMG_8409.png");
+    background-size: cover;
+    top: -20vw;
+    left: 0;
+    position: fixed;
+    z-index: 2000;
   }
   body {
     background-image: url("IMG_8410.png");
@@ -61,16 +74,6 @@
     width: 100%;
     height: 20vw;
     position: relative;
-  }
-  #header {
-    width: 100vw;
-    height: 23.22vw;
-    background-image: url("IMG_8409.png");
-    background-size: cover;
-    top: 0;
-    left: 0;
-    position: fixed;
-    z-index: 2000;
   }
   .corner {
     position: fixed;
@@ -135,6 +138,11 @@
   }
 </style>
 <script>
+  function onload() {
+  document.getElementsByClassName("link")[0].style.top = 5 + "vw";
+  document.getElementsByClassName("link2")[0].style.top = 5 + "vw";
+  document.getElementById("header").style.top = 0;
+  }
   nog1 = 1;
   nog = 1;
   function addgrade() {
