@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>4.0 Scale Calculator</h1>
+<h2>Current Grade:</h2>
+<h3 id="grade">...</h3>
+<button onclick="addcourse()" >Add Course</button>
+<div id="courses">
+<div id="c1">
+<br><span>Added Points: </span><input id="ap1"> | Letter Grade: <input id="lg1"><span style="font-family: bold" id="g1"> | Grade</span>
+</div>
+</div>
+<style>
+  
+  #courses {
+    font-family: light;
+    font-size: 3.33vw;
+  }
+  input {
+    font-family: light;
+    border-radius: 0.5vw;
+    font-size: 2vw;
+    width: 6.67vw;
+    height: 2.33vw;
+  }
+  h1 {
+    font-family: bold;
+    font-size: 5vw;
+  }
+  h3 {
+    font-family: bold;
+    font-size: 4vw;
+    margin-top: -3.33vw;
+  }
+  h2 {
+    font-family: bold;
+    font-size: 4vw;
+    margin-top: -3.33vw;
+  }
+  button {
+    color: #bfd3ef;
+    background-color: #000000;
+    left: 30%;
+    top: 0%;
+    width: 26.67vw;
+    height: 5vw;
+    font-size: 3.33vw;
+    font-family: light;
+    border-radius: 0.5vw;
+  }
+  body {
+    text-align: center;
+  }
+  input {
+    width: 5vw;
+  }
+</style>
+<script>
+  noc = 1;
+  c = document.getElementById("courses");
+  function addcourse() {
+    noc += 1;
+    newDiv = document.createElement("div");
+    newDiv.id = "c".concat(noc.toString());
+    c.appendChild(newDiv);
+    nSpan = document.createElement("span");
+    nSpan.innerHTML = "Added Points: ";
+    newDiv.appendChild(nSpan);
+    nIn = document.createElement("input");
+    nIn.id = "ap".concat(noc.toString());
+    newDiv.appendChild(nIn);
+    nSpan = document.createElement("span");
+    nSpan.innerHTML = " | Letter Grade: ";
+    newDiv.appendChild(nSpan);
+    nIn = document.createElement("input");
+    nIn.id = "lg".concat(noc.toString());
+    newDiv.appendChild(nIn);
+    nSpan = document.createElement("span");
+    nSpan.id = "g".concat(noc.toString());
+    nSpan.innerHTML = " | Grade";
+    nSpan.style.fontFamily = "bold";
+    newDiv.appendChild(nSpan);
+  }
+  window.addEventListener("keydown", function() {
+    setTimeout(function() {
+    for (i = 1; i < noc + 1; i++) {
+      AdPt = document.getElementById("ap".concat(i.toString())).value;
+      LtGd = document.getElementById("lg".concat(i.toString())).value;
+      if (LtGd == "F") {
+        LtGd = 0.0;
+      } else if (LtGd == "D-") {
+        LtGd = 0.7;
+      } else if (LtGd == "D") {
+        LtGd = 1.0;
+      } else if (LtGd == "D+") {
+        LtGd = 1.3;
+      } else if (LtGd == "C-") {
+        LtGd = 1.7;
+      } else if (LtGd == "C") {
+        LtGd = 2.0;
+      } else if (LtGd == "C+") {
+        LtGd = 2.3;
+      } else if (LtGd == "B-") {
+        LtGd = 2.7;
+      } else if (LtGd == "B") {
+        LtGd = 3.0;
+      } else if (LtGd == "B+") {
+        LtGd = 3.3;
+      } else if (LtGd == "A-") {
+        LtGd = 3.7;
+      } else if (LtGd == "A") {
+        LtGd = 4.0;
+      } else if (LtGd == "A+") {
+        LtGd = 4.3;
+      } else {
+        continue;
+      }
+      if (parseInt(AdPt) > -1000) {
+        LtGd += parseInt(AdPt);
+      } else if (AdPt == "") {} else {
+        continue;
+      }
+      if (LtGd % 1 == 0) {
+        LtGd = LtGd.toString().concat(".0");
+      } else {
+        LtGd = LtGd.toString();
+      }
+      document.getElementById("g".concat(i.toString())).innerHTML = " | ".concat(LtGd);
+    }
+    total = 0;
+    mnoc = noc;
+    for (i = 1; i < noc + 1; i++) {
+      if (document.getElementById("g".concat(i.toString())).innerHTML == " | Grade") { mnoc -= 1; continue; }
+      total += parseFloat(document.getElementById("g".concat(i.toString())).innerHTML.substring(3));
+    }
+    rawGpa = (parseFloat((Math.round((total / mnoc) * 10)) / 10));
+    if (rawGpa % 1 == 0) {
+      rawGpa = rawGpa.toString().concat(".0");
+    } else {
+      rawGpa = rawGpa.toString();
+    }
+    if (mnoc == 0) {
+    document.getElementById("grade").innerHTML = "...";
+    } else {
+    document.getElementById("grade").innerHTML = rawGpa;
+    }
+    }, 100);
+  })
+</script>
+</body>
+</html>
